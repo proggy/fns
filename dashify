@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import sys
+import fns.frogs
+frog = fns.frogs.fns._dashify
+sys.exit(frog())
