@@ -8,7 +8,7 @@ Tools for renaming files and folders to match my preferred file naming scheme.
 Copyright notice
 ----------------
 
-Copyright (C) 2013-2014 Daniel Jung.
+Copyright (C) 2014 Daniel Jung.
 Contact: djungbremen@gmail.com
 
 This program is free software; you can redistribute it and/or modify it

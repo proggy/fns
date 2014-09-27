@@ -35,19 +35,21 @@ import string
 BADCHARS = ' _.,:;()[]{}"\'`~!?@#$%^&*=+/\\|<>'  # will be replaced by a dash
 
 def dashify(files, test=False, verbose=False, alldots=False, nolower=False):
-    """Rename the given files by turning certain characters into dashes.
+    """Rename the given list of files by replacing certain characters by
+    dashes.
 
     Also does the following on the selected filenames:
 
         - All characters are switched to lowercase unless *nolower* is *True*.
-        - The last dot "." is preserved unless *alldots* is *True*.
-        - Adjacent dashes are replaced by one dash.
+        - The last dot in the filename is preserved unless *alldots* is *True*.
+        - Adjacent dashes are reduced to only one dash.
         - Trailing dashes are removed.
         - Dashes in front of the suffix (last dot) are removed.
         - Leading dashes are removed.
         - Dashes separating characters followed by a digit are removed.
 
-    It is possible to use filename patterns.
+    It is possible to use filename patterns using the usual wildcard
+    characters, e.g. "*" and "?".
     """
 
     # evaluate filename patterns, collect all filenames
