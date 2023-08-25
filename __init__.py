@@ -4,8 +4,8 @@
 # Copyright notice
 # ----------------
 #
-# Copyright (C) 2014 Daniel Jung
-# Contact: djungbremen@gmail.com
+# Copyright (C) 2014-2023 Daniel Jung
+# Contact: proggy-contact@mailbox.org
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the Free
@@ -23,8 +23,7 @@
 #
 """Tools for renaming files and folders to match my preferred file naming
 scheme."""
-__created__ = '2014-09-27'
-__modified__ = '2014-09-27'
+__version__ = 'v0.1.0'
 
 import os
 import glob
@@ -58,8 +57,7 @@ def dashify(files, test=False, verbose=False, alldots=False, nolower=False):
         filepattern = os.path.expanduser(filepattern)
         results = glob.glob(filepattern)
         if not results:
-            print >> sys.stderr, \
-                    'dashify: %s: no such file or directory' % filepattern
+            print(f'dashify: {filepattern}: no such file or directory', file=sys.stderr)
             sys.exit(1)
         for result in results:
             filenames.add(result)
@@ -110,31 +108,27 @@ def dashify(files, test=False, verbose=False, alldots=False, nolower=False):
                     continue
                 if index >= len(newname) - 1:
                     continue
-                if newname[index-1] in string.letters \
+                if newname[index-1] in string.ascii_letters \
                         and newname[index+1] in string.digits:
                     newname = newname[:index] + newname[(index+1):]
             index += 1
 
         # renaming results in something dangerous?
         if not newname:
-            print >> sys.stderr, \
-                    'dashify: error: %s: omitting empty newname' % filename
+            print(f'dashify: error: {filename}: omitting empty newname', file=sys.stderr)
             continue
         if newname == '.':
-            print >> sys.stderr, \
-                    'dashify: error: %s: omitting invalid newname' % filename
+            print(f'dashify: error: {filename}: omitting invalid newname', file=sys.stderr)
             continue
         if filename[0] != '.' and newname[0] == '.':
-            print >> sys.stderr, \
-                    'dashify: warning: %s: new name features a leading dot' \
-                    % newname
+            print(f'dashify: warning: {newname}: new name features a leading dot', file=sys.stderr)
 
         # no renaming necessary?
         if newname == filename:
             continue
 
         if verbose or test:
-            print '%s --> %s' % (filename, newname)
+            print(f'{filename} --> {newname}')
         if not test:
             os.rename(filename, newname)
 
